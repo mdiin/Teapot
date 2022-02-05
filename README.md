@@ -4,8 +4,8 @@ Teapot is micro web framework for [Pharo Smalltalk](https://pharo.org) on top of
 
 **[Explore the docs](/docs)**
 
-[![Build Status](https://travis-ci.com/fortizpenaloza/Teapot.svg?branch=master)](https://travis-ci.com/fortizpenaloza/Teapot)
-[![Coverage Status](https://coveralls.io/repos/github/fortizpenaloza/Teapot/badge.svg?branch=master)](https://coveralls.io/github/fortizpenaloza/Teapot?branch=master)
+[![Build Status](https://travis-ci.com/zeroflag/Teapot.svg?branch=master)](https://travis-ci.com/zeroflag/Teapot)
+[![Coverage Status](https://coveralls.io/repos/github/zeroflag/Teapot/badge.svg?branch=master)](https://coveralls.io/github/zeroflag/Teapot?branch=master)
 
 > *Name origin*: [418 I'm a teapot](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) (RFC 2324) is an HTTP status code.
 
@@ -28,3 +28,7 @@ To load the project in a Pharo image, or declare it as a dependency of your own 
 ## Contributing
 
 Check the [Contribution Guidelines](CONTRIBUTING.md)
+
+## Other
+
+If you want to lively work with Teapot or quickly implement REST services with it we recommend to have a look at the [Tealight project](https://github.com/astares/Tealight) - a thin layer on top of Teapot to quickly experiment and deliver
