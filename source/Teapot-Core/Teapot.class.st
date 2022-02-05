@@ -129,6 +129,17 @@ Teapot >> TRACE: patternActionAssoc [
 ]
 
 { #category : #private }
+Teapot >> addNamedRoute: aName method: aTeaMethodMatcher pattern: pattern action: aTeaAction [
+	current := dynamicRouter addRoute:
+		(TeaRoute
+			matcher: (TeaRequestMatcher method: aTeaMethodMatcher url: pattern asTeaUrlPattern)
+			name: aName
+			action: aTeaAction
+			transformer: defaultOutput
+			port: server port)
+]
+
+{ #category : #private }
 Teapot >> addRouteMethod: aTeaMethodMatcher pattern: pattern action: aTeaAction [
 	current := dynamicRouter addRoute:
 		(TeaRoute
@@ -193,6 +204,18 @@ Teapot >> initializeOptions: optionsDictionary [
 Teapot >> output: transformerBlockOrSymbol [
 	current responseTransformer: (self responseTransformer: transformerBlockOrSymbol)
 	
+]
+
+{ #category : #router }
+Teapot >> pathTo: aName [
+	^ self pathTo: aName params: Dictionary new
+]
+
+{ #category : #router }
+Teapot >> pathTo: aName params: aDictionary [
+	| params |
+	params := aDictionary ifNil: [ Dictionary new ] ifNotNil: [ aDictionary ].
+	^ dynamicRouter pathTo: aName params: params
 ]
 
 { #category : #private }

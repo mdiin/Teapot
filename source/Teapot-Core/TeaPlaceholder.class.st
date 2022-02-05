@@ -62,6 +62,11 @@ TeaPlaceholder >> printOn: aStream [
 		nextPut: $>
 ]
 
+{ #category : #'as yet unclassified' }
+TeaPlaceholder >> printOn: aStream substitutingFrom: placeholders [
+	aStream nextPutAll: (placeholders at: placeholderName)
+]
+
 { #category : #initialization }
 TeaPlaceholder >> setPlaceholderName: aString typeConstraint: aTypeConstraint [
 	placeholderName := aString asSymbol.

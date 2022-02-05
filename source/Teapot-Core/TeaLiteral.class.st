@@ -32,6 +32,11 @@ TeaLiteral >> printOn: aStream [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+TeaLiteral >> printOn: aStream substitutingFrom: placeholders [
+	aStream nextPutAll: literal
+]
+
 { #category : #initialization }
 TeaLiteral >> setLiteral: aString [
 	literal := aString.

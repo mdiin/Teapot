@@ -40,6 +40,17 @@ TeaGlobUrlPattern class >> parseString: aString [
 	^ self new setSegments: (self parseSegments: aString)
 ]
 
+{ #category : #printing }
+TeaGlobUrlPattern >> constructPath: placeholders [
+
+	| aStream |
+	aStream := WriteStream on: ''.
+	segments
+		do: [ :each | each printOn: aStream substitutingFrom: placeholders ]
+		separatedBy: [ aStream nextPut: $/ ].
+	^ aStream contents
+]
+
 { #category : #'url matcher' }
 TeaGlobUrlPattern >> matchesUrl: anUrl placeholders: aDictionary [
 	| urlSegments |

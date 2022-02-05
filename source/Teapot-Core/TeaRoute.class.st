@@ -10,6 +10,7 @@ Class {
 	#name : #TeaRoute,
 	#superclass : #Object,
 	#instVars : [
+		'name',
 		'responseTransformer',
 		'action',
 		'requestMatcher',
@@ -20,8 +21,15 @@ Class {
 
 { #category : #'instance creation' }
 TeaRoute class >> matcher: aTeaRequestMatcher action: aTeaAction transformer: aResponseTransformer port: portNumber [
+	^ self matcher: aTeaRequestMatcher name: nil action: aTeaAction transformer: aResponseTransformer port: portNumber
+]
+
+{ #category : #'instance creation' }
+TeaRoute class >> matcher: aTeaRequestMatcher 
+name: aName action: aTeaAction transformer: aResponseTransformer port: portNumber [
 	^ self new 
 		setMatcher: aTeaRequestMatcher
+		name: aName
 		action: aTeaAction
 		transformer: aResponseTransformer
 		port: portNumber "XXX only used by teapsoon inspector"
@@ -31,6 +39,11 @@ TeaRoute class >> matcher: aTeaRequestMatcher action: aTeaAction transformer: aR
 TeaRoute >> canHandleUrl: aZnUrl [
 	"only check the URL not without checking HTTP Method or when clause"
 	^ requestMatcher matchesUrl: aZnUrl
+]
+
+{ #category : #printing }
+TeaRoute >> constructPath: params [
+	^ (requestMatcher urlPattern) constructPath: params
 ]
 
 { #category : #'request handling' }
@@ -49,6 +62,11 @@ TeaRoute >> methodMatcher [
 	^ requestMatcher methodMatcher 
 ]
 
+{ #category : #accessing }
+TeaRoute >> name [
+	^ name
+]
+
 { #category : #printing }
 TeaRoute >> printOn: aStream [
 	requestMatcher printOn: aStream.
@@ -63,7 +81,19 @@ TeaRoute >> responseTransformer: aBlock [
 
 { #category : #initialization }
 TeaRoute >> setMatcher: aTeaRequestMatcher action: aTeaAction transformer: aResponseTransformer port: portNumber [
+
+	^ self
+		  setMatcher: aTeaRequestMatcher
+		  name: nil
+		  action: aTeaAction
+		  transformer: aResponseTransformer
+		  port: portNumber
+]
+
+{ #category : #initialization }
+TeaRoute >> setMatcher: aTeaRequestMatcher name: aName action: aTeaAction transformer: aResponseTransformer port: portNumber [
 	requestMatcher := aTeaRequestMatcher.
+	name := aName.
 	action := aTeaAction.
 	responseTransformer := aResponseTransformer.
 	port := portNumber.

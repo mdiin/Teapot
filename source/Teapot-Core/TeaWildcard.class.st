@@ -26,3 +26,14 @@ TeaWildcard >> matches: urlSegments rest: adjacentPatterns placeholders: aDictio
 TeaWildcard >> printOn: aStream [
 	aStream nextPut: $*
 ]
+
+{ #category : #printing }
+TeaWildcard >> printOn: aStream substitutingFrom: placeholders [
+
+	| nextWildcardPlaceholder wildcardSubstitution |
+	nextWildcardPlaceholder := (placeholders keysSortedSafely select: [ 
+		                            :k | k beginsWith: '_' ]) first.
+	wildcardSubstitution := placeholders at: nextWildcardPlaceholder.
+	placeholders removeKey: nextWildcardPlaceholder.
+	aStream nextPutAll: wildcardSubstitution
+]

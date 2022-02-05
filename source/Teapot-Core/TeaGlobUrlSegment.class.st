@@ -12,3 +12,8 @@ Class {
 TeaGlobUrlSegment >> matches: urlSegments rest: adjacentPatterns placeholders: aDictionary [
 	self subclassResponsibility
 ]
+
+{ #category : #'as yet unclassified' }
+TeaGlobUrlSegment >> printOn: aStream substitutingFrom: placeholders [
+	self subclassResponsibility 
+]

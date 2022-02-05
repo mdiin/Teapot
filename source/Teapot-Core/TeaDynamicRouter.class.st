@@ -29,6 +29,13 @@ TeaDynamicRouter >> initialize [
 	routes := OrderedCollection new.
 ]
 
+{ #category : #router }
+TeaDynamicRouter >> pathTo: aName params: aDictionary [
+	| route |
+	route := routes detect: [ :r | r name = aName ] ifNone: [ nil ].
+	^ route ifNil: [ nil ] ifNotNil: [ route constructPath: aDictionary ]
+]
+
 { #category : #accessing }
 TeaDynamicRouter >> routes [
 
